@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Analysis</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap">
+    <style>
+        body {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background-color: #fff;
+            color: #333;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-container img {
+            height: 40px;
+            filter: brightness(0);
+        }
+
+        .header-content span {
+            font-size: 24px;
+            font-weight: bold;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .sidebar {
+            background-color: #CEE0F2;
+            width: 250px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h3 {
+            margin: 0;
+            margin-bottom: 20px; /* Added space below the heading */
+        }
+
+        .filters {
+            margin: 0;
+        }
+
+        .filters label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .filters input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px; /* Added space below the input box */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .filters .checkbox-group {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filters .checkbox-group label {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .filters .checkbox-group input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .apply-filters {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .apply-filters button {
+            background-color: #305881;
+            color: #fff;
+            border: none;
+            border-radius: 3px; /* Small radius for a sleek look */
+            padding: 10px 20px; /* Reduced padding for a smaller button */
+            cursor: pointer;
+            font-size: 12px; /* Smaller font size */
+            text-align: center;
+        }
+
+        .apply-filters button:hover {
+            background-color: #244a6c; /* Slightly darker shade on hover */
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart {
+            width: 100%;
+            height: 400px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        footer {
+            background-color: #305881;
+            color: #fff;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer .footer-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        footer .footer-buttons button {
+            background-color: #305881; /* Change this to your desired color */
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        footer .footer-buttons button:hover {
+            background-color: #244a6c; /* Slightly darker on hover */
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 10px;
+        }
+
+        nav button {
+            background-color: #fff;
+            color: #000000;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        nav button:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="logo.png" alt="Logo">
+            </div>
+            <span>AgriTech</span>
+        </div>
+        <nav>
+            <ul>
+                <li><button>Dashboard</button></li>
+                <li><button>Predictive Analysis</button></li>
+                <li><button>Settings</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <aside class="sidebar">
+            <h3>Filter Options</h3>
+            <div class="filters">
+                <label for="data-range">Data Range</label>
+                <input type="text" id="data-range" placeholder="Enter Date/Month/Year">
+                
+                <label for="commodity">Commodity</label>
+                <input type="text" id="commodity" placeholder="">
+                
+                <div class="checkbox-group">
+                    <label><input type="checkbox"> Show Trends</label>
+                    <label><input type="checkbox"> Include Weather Impact</label>
+                    <label><input type="checkbox"> Market Demand</label>
+                </div>
+
+                <div class="apply-filters">
+                    <button>Apply Filters</button>
+                </div>
+            </div>
+        </aside>
+
+        <div class="main-content">
+            <section class="section">
+                <h3>Historical Data Trends</h3>
+                <div class="chart"></div>
+            </section>
+
+            <section class="section">
+                <h3>Weather Conditions Impact</h3>
+                <div class="chart"></div>
+            </section>
+
+            <section class="section">
+                <h3>Market Demand Functions</h3>
+                <div class="chart"></div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-buttons">
+            <button>Support</button>
+            <button>Terms of Service</button>
+            <button>Privacy Policy</button>
+        </div>
+        <div>© 2024 AgriTech</div>
+    </footer>
+
+    <script>
+        // Example chart initialization using Chart.js
+        // Ensure you include Chart.js in your project for this to work
+        document.addEventListener('DOMContentLoaded', () => {
+            const charts = document.querySelectorAll('.chart');
+            charts.forEach(chart => {
+                new Chart(chart, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                        datasets: [{
+                            label: 'Data',
+                            data: [12, 19, 3, 5, 2, 3, 15],
+                            borderColor: 'blue',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
